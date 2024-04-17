@@ -1,16 +1,18 @@
+import main.java.Backend.Submit;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
 
 public class Saving extends JFrame {
     private static JTextArea textArea;
     private JTextArea questionArea;
     private JTextArea resultArea;
+    public String result = "";
 
-    public String answer = "";
+    public static String answer = "";
 
     public static String getTextArea(){
         return textArea.getText();
@@ -46,9 +48,17 @@ public class Saving extends JFrame {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                 answer = Saving.getTextArea();
+                answer = Saving.getTextArea();
                 System.out.println(answer);
                 System.out.println(Saving.timeReturner());
+                String code = "public class Main {"+"\n" +
+                        "    public static void main(String[] args) {"+"\n"  +
+                        "        System.out.println(\"Hello World!\");"+"\n" +
+                        "    }"+"\n"  +
+                        "}";
+                System.out.println(answer.trim().equals(code.trim()));
+                result = Submit.go(Saving.timeReturner(), 1, answer);
+                resultArea.setText(result);
             }
         });
         buttonPanel.add(submitButton);
@@ -63,24 +73,28 @@ public class Saving extends JFrame {
     }
 
     //时间
-    public static String timeReturner(){
-        LocalDateTime now = LocalDateTime.now();
-        String formattedDateTime = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        return formattedDateTime;
+    public static long timeReturner(){
+        long currentTimeMillis = System.currentTimeMillis();
+        return currentTimeMillis;
     }
 
     //用户的作答
-    public String answerReturner(){
+    public  String answerReturner(){
         return answer;
     }
 
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new Saving();
-            }
-        });
+        System.out.println(util.FileHelper.getDataPath());
+        Saving saving = new Saving();
+        String code = "public class Main {"+"\n" +
+                "    public static void main(String[] args) {"+"\n"  +
+                "        System.out.println(\"Hello World!\");"+"\n" +
+                "    }"+"\n"  +
+                "}";
+        System.out.println(code);
+        System.out.println(saving.answerReturner().equals(code));
+        System.out.println();
+        System.out.println(Submit.go(Saving.timeReturner(),1,code));
     }
 }

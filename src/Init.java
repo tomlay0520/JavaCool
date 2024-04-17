@@ -124,7 +124,7 @@ public class Init {
 
 
      //返回题号
-    private int startQuiz() throws Exception {
+    public int startQuiz() throws Exception {
         // 获取选中题目的索引
         int selectedIndex = questionList.getSelectedIndex();
 
