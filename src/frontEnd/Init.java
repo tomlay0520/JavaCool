@@ -1,3 +1,7 @@
+package frontEnd;
+
+
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,13 +15,14 @@ public class Init {
     private JScrollPane questionListScrollPane;
     private JList<String> questionList;
     private JPanel infoPanel;
+    private JTextArea textArea;
     private JLabel accuracyLabel;
     private JScrollPane rankingScrollPane;
     private JTable rankingTable;
     private JButton startQuizBtn;
     private JButton exitBtn;
 
-    public Init() {
+    public Init() throws Exception {
         // 创建主窗
         frame = new JFrame("Initial Page");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,7 +52,7 @@ public class Init {
         navPanel.add(personalCenterBtn);
     }
 
-    private void createMainPanel() {
+    private void createMainPanel() throws Exception {
         mainPanel = new JPanel(new BorderLayout());
 
         // 创建题目列表面板
@@ -91,35 +96,48 @@ public class Init {
         questionListScrollPane.setPreferredSize(new Dimension(200, 0));
     }
 
-    private void createInfoPanel() {
+    private void createInfoPanel() throws Exception {
         infoPanel = new JPanel(new BorderLayout());
-
+        textArea = new JTextArea();
+        textArea.setSize(300, 400);
         // 创建正确率标签
         accuracyLabel = new JLabel("Accuracy：80%");
-        infoPanel.add(accuracyLabel, BorderLayout.NORTH);
+//        infoPanel.add(accuracyLabel, BorderLayout.NORTH);
+//
+//        // 创建排名表格
+//        String[] columnNames = {"Rank", "Username", "Score"};
+//        Object[][] data = {
+//                {1, "User1", 95},
+//                {2, "User2", 90},
+//                {3, "User3", 85},
+//                {4, "User4", 80},
+//                {5, "User5", 75},
+//                {6, "User6", 70},
+//                {7, "User7", 60},
+//                {8, "User8", 55},
+//                {9, "User9", 50},
+//                {10, "User10", 45},
+//                {11, "User11", 35},
+//                {12, "User12", 30},
+//                {13, "User13", 25},
+//                {14, "User14", 20},
+//                {15, "User15", 5}
+//        };
+//        rankingTable = new JTable(data, columnNames);
+//        rankingScrollPane = new JScrollPane(rankingTable);
+//        rankingScrollPane.setSize(300, 300);
 
-        // 创建排名表格
-        String[] columnNames = {"Rank", "Username", "Score"};
-        Object[][] data = {
-                {1, "User1", 95},
-                {2, "User2", 90},
-                {3, "User3", 85},
-                {4, "User4", 80},
-                {5, "User5", 75},
-                {6, "User6", 70},
-                {7, "User7", 60},
-                {8, "User8", 55},
-                {9, "User9", 50},
-                {10, "User10", 45},
-                {11, "User11", 35},
-                {12, "User12", 30},
-                {13, "User13", 25},
-                {14, "User14", 20},
-                {15, "User15", 5}
-        };
-        rankingTable = new JTable(data, columnNames);
-        rankingScrollPane = new JScrollPane(rankingTable);
-        infoPanel.add(rankingScrollPane, BorderLayout.CENTER);
+
+
+
+        
+        //114514tom 1354
+//        textArea.setText(BEHelper.getInnerProblem(startQuiz()).getQuestion());
+        textArea.setEditable(false);
+
+        infoPanel.add(textArea, BorderLayout.CENTER);
+
+//        infoPanel.add(textArea, BorderLayout.SOUTH);
     }
 
 
@@ -140,7 +158,7 @@ public class Init {
         }
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(Init::new);
+    public static void main(String[] args) throws Exception {
+         new Init();
     }
 }

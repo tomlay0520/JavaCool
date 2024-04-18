@@ -1,3 +1,5 @@
+package frontEnd;
+
 import main.java.Backend.Submit;
 
 import javax.swing.*;

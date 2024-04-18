@@ -1,9 +1,9 @@
+package frontEnd;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-
 public class LoginUi extends JFrame{
     private JLabel username = new JLabel("UserName:");
     private JLabel password = new JLabel("PassWord:");
@@ -16,7 +16,7 @@ public class LoginUi extends JFrame{
     ImageIcon icon = new ImageIcon("pics/图片1.png");
     JLabel labelPic = new JLabel(icon);
     JButton buttonLogin = new JButton("Login");
-    JButton buttonRegis = new JButton("Register");
+    JButton buttonRegis = new JButton("frontEnd.Register");
     JPanel panelNull = new JPanel();
     JPanel panelButton = new JPanel(new GridLayout(1, 3));
 
@@ -43,7 +43,11 @@ public class LoginUi extends JFrame{
                 if (e.getSource() == buttonLogin &&
                         user.getText().equals("manager0520") && pass.getText().equals("123456")){
                     JOptionPane.showMessageDialog(null,"Login successfully!");
-                    new Init();
+                    try {
+                        new Init();
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
                     frame.setVisible(false);
                 }else if (e.getSource() == buttonLogin &&
                         !user.getText().equals("manager0520") || !pass.equals("123456")){
