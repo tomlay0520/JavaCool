@@ -1,7 +1,4 @@
 package frontEnd;
-
-
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -96,6 +93,8 @@ public class Init {
         questionListScrollPane.setPreferredSize(new Dimension(200, 0));
     }
 
+
+
     private void createInfoPanel() throws Exception {
         infoPanel = new JPanel(new BorderLayout());
         textArea = new JTextArea();
@@ -103,8 +102,7 @@ public class Init {
         // 创建正确率标签
         accuracyLabel = new JLabel("Accuracy：80%");
 //        infoPanel.add(accuracyLabel, BorderLayout.NORTH);
-//
-//        // 创建排名表格
+//        创建排名表格
 //        String[] columnNames = {"Rank", "Username", "Score"};
 //        Object[][] data = {
 //                {1, "User1", 95},
@@ -126,22 +124,16 @@ public class Init {
 //        rankingTable = new JTable(data, columnNames);
 //        rankingScrollPane = new JScrollPane(rankingTable);
 //        rankingScrollPane.setSize(300, 300);
-
-
-
-
-        
-        //114514tom 1354
-//        textArea.setText(BEHelper.getInnerProblem(startQuiz()).getQuestion());
+//        114514tom 1354
+        int x= startQuiz();
+        textArea.setText(Integer.toString(x));
         textArea.setEditable(false);
-
         infoPanel.add(textArea, BorderLayout.CENTER);
-
 //        infoPanel.add(textArea, BorderLayout.SOUTH);
     }
 
 
-     //返回题号
+    //返回题号
     public int startQuiz() throws Exception {
         // 获取选中题目的索引
         int selectedIndex = questionList.getSelectedIndex();
@@ -151,14 +143,16 @@ public class Init {
             // 返回选中题目的索引
             return selectedIndex + 1;
         } else {
-            // 提示用户选择一个题目
-            JOptionPane.showMessageDialog(frame, "请选择一个题目", "错误", JOptionPane.ERROR_MESSAGE);
-            // 抛出异常，提示用户没有选择题目
-            throw new Exception("you didn't select a problem");
+//            提示用户选择一个题目
+//            JOptionPane.showMessageDialog(frame, "请选择一个题目", "错误", JOptionPane.ERROR_MESSAGE);
+//            抛出异常，提示用户没有选择题目
+//            throw new Exception("you didn't select a problem");
+            return -1;
         }
+
     }
 
     public static void main(String[] args) throws Exception {
-         new Init();
+        new Init();
     }
 }
