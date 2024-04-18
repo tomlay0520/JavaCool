@@ -3,6 +3,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Init {
     private JFrame frame;
@@ -18,7 +20,7 @@ public class Init {
     private JTable rankingTable;
     private JButton startQuizBtn;
     private JButton exitBtn;
-
+    private int indexOfProblem;
     public Init() throws Exception {
         // 创建主窗
         frame = new JFrame("Initial Page");
@@ -32,6 +34,7 @@ public class Init {
         // 创建主要内容面板
         createMainPanel();
 
+
         // 将导航栏和主要内容面板添加到主窗口中
         frame.add(navPanel, BorderLayout.NORTH);
         frame.add(mainPanel, BorderLayout.CENTER);
@@ -39,6 +42,7 @@ public class Init {
         // 设置窗口可见
         frame.setVisible(true);
         frame.setLocation(400, 120);
+
     }
 
     private void createNavPanel() {
@@ -54,7 +58,22 @@ public class Init {
 
         // 创建题目列表面板
         createQuestionListPanel();
-        mainPanel.add(questionListScrollPane, BorderLayout.WEST);
+        questionList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    int index = questionList.locationToIndex(e.getPoint());
+                    if (index != -1) {
+                        System.out.println("Double clicked on item at index: " + index);
+                        indexOfProblem = index+1;
+                        System.out.println(indexOfProblem);
+                    }
+                }
+            }
+        });
+
+
+        mainPanel.add(questionList, BorderLayout.WEST);
 
         // 创建信息面板
         createInfoPanel();
@@ -101,37 +120,14 @@ public class Init {
         textArea.setSize(300, 400);
         // 创建正确率标签
         accuracyLabel = new JLabel("Accuracy：80%");
-//        infoPanel.add(accuracyLabel, BorderLayout.NORTH);
-//        创建排名表格
-//        String[] columnNames = {"Rank", "Username", "Score"};
-//        Object[][] data = {
-//                {1, "User1", 95},
-//                {2, "User2", 90},
-//                {3, "User3", 85},
-//                {4, "User4", 80},
-//                {5, "User5", 75},
-//                {6, "User6", 70},
-//                {7, "User7", 60},
-//                {8, "User8", 55},
-//                {9, "User9", 50},
-//                {10, "User10", 45},
-//                {11, "User11", 35},
-//                {12, "User12", 30},
-//                {13, "User13", 25},
-//                {14, "User14", 20},
-//                {15, "User15", 5}
-//        };
-//        rankingTable = new JTable(data, columnNames);
-//        rankingScrollPane = new JScrollPane(rankingTable);
-//        rankingScrollPane.setSize(300, 300);
-//        114514tom 1354
         textArea.setText("Welcome"+"\n"+ "to"+"\n"
                 +"Java"+"\n"+"Cool!");
         Font font = new Font("Arial", Font.PLAIN, 100);
         textArea.setFont(font);
         textArea.setEditable(false);
         infoPanel.add(textArea, BorderLayout.CENTER);
-//        infoPanel.add(textArea, BorderLayout.SOUTH);
+//
+
     }
 
 
@@ -145,10 +141,6 @@ public class Init {
             // 返回选中题目的索引
             return selectedIndex + 1;
         } else {
-//            提示用户选择一个题目
-//            JOptionPane.showMessageDialog(frame, "请选择一个题目", "错误", JOptionPane.ERROR_MESSAGE);
-//            抛出异常，提示用户没有选择题目
-//            throw new Exception("you didn't select a problem");
             return -1;
         }
 
