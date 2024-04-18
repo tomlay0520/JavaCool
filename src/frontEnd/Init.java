@@ -97,6 +97,12 @@ public class Init {
                 }
             }
         });
+        exitBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+            }
+        });
 
         buttonPanel.add(startQuizBtn);
         buttonPanel.add(exitBtn);
@@ -126,7 +132,6 @@ public class Init {
         textArea.setFont(font);
         textArea.setEditable(false);
         infoPanel.add(textArea, BorderLayout.CENTER);
-//
 
     }
 

@@ -16,7 +16,7 @@ public class LoginUi extends JFrame{
     ImageIcon icon = new ImageIcon("pics/图片1.png");
     JLabel labelPic = new JLabel(icon);
     JButton buttonLogin = new JButton("Login");
-    JButton buttonRegis = new JButton("frontEnd.Register");
+    JButton buttonRegis = new JButton("Register");
     JPanel panelNull = new JPanel();
     JPanel panelButton = new JPanel(new GridLayout(1, 3));
 
@@ -54,6 +54,13 @@ public class LoginUi extends JFrame{
                     JOptionPane.showMessageDialog(null, "username doesn't exist or password is wrong!");
                 }
 
+            }
+        });
+        buttonRegis.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                new Register();
             }
         });
     }
