@@ -9,10 +9,12 @@ import java.awt.event.ActionListener;
 
 
 public class Saving extends JFrame {
+    private JFrame frame = new JFrame();
     private static JTextArea textArea;
     private JTextArea questionArea;
     private JTextArea resultArea;
     public String result = "";
+    private JButton back = new JButton("Back");
 
     public static String answer = "";
 
@@ -21,9 +23,8 @@ public class Saving extends JFrame {
     }
     public Saving() {
         setTitle("做题界面");
-        setSize(600, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 700);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocation(380, 100);
         JPanel mainPanel = new JPanel(new GridLayout(1, 2));
 
@@ -41,11 +42,11 @@ public class Saving extends JFrame {
         questionArea.setEditable(false);
         rightPanel.add(new JScrollPane(questionArea), BorderLayout.NORTH);
         rightPanel.add(new JScrollPane(resultArea), BorderLayout.CENTER);
-
-
+        mainPanel.add(leftPanel);
+        mainPanel.add(rightPanel);
 
         // 按钮面板
-        JPanel buttonPanel = new JPanel();
+        JPanel buttonPanel = new JPanel(new FlowLayout());
         JButton submitButton = new JButton("提交");
         submitButton.addActionListener(new ActionListener() {
             @Override
@@ -63,12 +64,20 @@ public class Saving extends JFrame {
                 resultArea.setText(result);
             }
         });
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    dispose(); // 关闭当前页面
+                    new Init(); // 打开新页面
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
         buttonPanel.add(submitButton);
-
+        buttonPanel.add(back);
         rightPanel.add(buttonPanel, BorderLayout.SOUTH);
-
-        mainPanel.add(leftPanel);
-        mainPanel.add(rightPanel);
 
         add(mainPanel);
         setVisible(true);

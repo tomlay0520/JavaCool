@@ -125,8 +125,10 @@ public class Init {
 //        rankingScrollPane = new JScrollPane(rankingTable);
 //        rankingScrollPane.setSize(300, 300);
 //        114514tom 1354
-        int x= startQuiz();
-        textArea.setText(Integer.toString(x));
+        textArea.setText("Welcome"+"\n"+ "to"+"\n"
+                +"Java"+"\n"+"Cool!");
+        Font font = new Font("Arial", Font.PLAIN, 100);
+        textArea.setFont(font);
         textArea.setEditable(false);
         infoPanel.add(textArea, BorderLayout.CENTER);
 //        infoPanel.add(textArea, BorderLayout.SOUTH);
